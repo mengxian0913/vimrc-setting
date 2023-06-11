@@ -54,7 +54,7 @@ set background=light
 " evening / industry / koehler / morning / murphy / pable
 " peachpuff / ron / shine / slate / torte / zollner
 
-colorscheme molokai
+colorscheme habamax
 
 " 搜尋，高亮標註
 set hlsearch
@@ -90,24 +90,6 @@ elseif &filetype == 'sh'
 endif
     endfunc
 
-
-" --- ↑ ---  快捷鍵配置 --- ↑ ---
-
-" JSON 文字格式化 
-" command! JSONFormat :execute '%!python -m json.tool' 
-
-command! JSONFormat :execute '%!python -m json.tool'
-\ | :execute '%!python -c "import re,sys;chr=__builtins__.__dict__.get(\"unichr\", chr);sys.stdout.write(re.sub(r\"\\\\u[0-9a-f]{4}\", lambda x: chr(int(\"0x\" + x.group(0)[2:], 16)).encode(\"utf-8\"), sys.stdin.read()))"'
-\ | :set ft=javascript
-\ | :1
-
-" XML 文字格式化
-command! XMLFormat :execute '%!xmllint --format -'
-
-" 常用的文字替代
-command! Br2line :execute '%s/<br>/---/g'
-
-" --- ↑ ---  命令行配置 --- ↑ ---
 
 
 set viminfo='1000,<500
@@ -148,12 +130,10 @@ set ruler
 set history=100
 
 set encoding=utf-8
-syntax on
 set ai
 set smartindent
 set backspace=2
 set ic
-set number
 
 
 :inoremap ( ()<Left>
@@ -244,4 +224,25 @@ endfunc
 
 
 map <C-A> ggVG"+Y
+
+" Vim configuration file "
+
+
+
+" highlight current line "
+set cursorline
+:highlight Cursorline cterm=bold ctermbg=none
+
+
+" enable smartcase search sensitivity "
+"set ignorecase
+"set smartcase
+
+" enable color themes "
+if !has('gui_running')
+	set t_Co=256
+endif
+" enable true colors support "
+
+"set termguicolors
 
